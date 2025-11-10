@@ -7517,7 +7517,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="DSCI-100:-Project-Planning---Tuna-Sayin">DSCI 100: Project Planning - Tuna Sayin<a class="anchor-link" href="#DSCI-100:-Project-Planning---Tuna-Sayin">¶</a></h1><p>In this document, I will analyze 2 of the dataset we have (players, sessions) and will explain these datasets. Further on I will select on broad and one specific question and explian why I chose this question. After selecting the questions, for answering the questions bettter, I will visualize the dataset we have to answer according to the questions and then will recommend how to proceed from there on.</p>
+<h1 id="DSCI-100:-Project-Planning---Tuna-Sayin">DSCI 100: Project Planning - Tuna Sayin<a class="anchor-link" href="#DSCI-100:-Project-Planning---Tuna-Sayin">¶</a></h1><p>In this document, I will analyze 2 of the dataset we have (players, sessions) and will explain these datasets. Further on I will select one broad and one specific question and explian why I chose this question. After selecting the questions, for answering the questions bettter, I will visualize the dataset we have to answer according to the questions and then will recommend how to proceed from there on.</p>
 <p>Please, run the cell below.</p>
 </div>
 </div>
@@ -7562,7 +7562,19 @@ The downloaded binary packages are in
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Loading-and-Understanding-the-Datasets">Loading and Understanding the Datasets<a class="anchor-link" href="#Loading-and-Understanding-the-Datasets">¶</a></h3><p>Let's start by loading the datasets, for better practice I will split this part into 2. We will start by discovering first players dataset then sessions to better understand the datasets we have. We will underline the columns of each of the dataset and try to understand the dataset.</p>
+<h2 id="Loading-and-Understanding-the-Datasets">Loading and Understanding the Datasets<a class="anchor-link" href="#Loading-and-Understanding-the-Datasets">¶</a></h2><p>Let's start by loading the datasets, for better practice I will split this part into 2. We will start by discovering first players dataset then sessions to better understand the datasets we have. We will underline the columns of each of the dataset and try to understand the dataset.</p>
+<p>Both of the datasets are collected from a minecraft server called Plaicraft that got setup to collect player data and their gameplay sessions to be able to answer few questions regarding a research. More details on the minecraft server can be found <a href="https://plaicraft.ai/">here</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5233969f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Exploration-of-players-dataset">Exploration of players dataset<a class="anchor-link" href="#Exploration-of-players-dataset">¶</a></h3>
 </div>
 </div>
 </div>
@@ -7638,6 +7650,132 @@ $ Age          <span class="ansi-black-intense-fg">&lt;dbl&gt;</span> 9<span cla
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=911685bc">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Summary-statistics-for-the-values-in-players">Summary statistics for the values in players<a class="anchor-link" href="#Summary-statistics-for-the-values-in-players">¶</a></h4><p>Please run the cell below the get the summary statistics for the values in the players dataset.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=705d5543">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-r"><pre><span></span><span class="c1"># Numerical stats</span>
+<span class="n">players</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="nf">where</span><span class="p">(</span><span class="n">is.numeric</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">summarise</span><span class="p">(</span><span class="nf">across</span><span class="p">(</span><span class="nf">everything</span><span class="p">(),</span>
+<span class="w">                   </span><span class="nf">list</span><span class="p">(</span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="nf">round</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">.x</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<span class="w">                        </span><span class="n">median</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="nf">round</span><span class="p">(</span><span class="nf">median</span><span class="p">(</span><span class="n">.x</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<span class="w">                        </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="nf">round</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">.x</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<span class="w">                        </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="nf">round</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">.x</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">))))</span>
+<span class="c1"># Gender stats</span>
+<span class="n">players</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="n">gender</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="n">percentage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+
+<span class="c1"># Experience stats</span>
+<span class="n">players</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="n">experience</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="n">percentage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<table class="dataframe">
+<caption>A tibble: 1 × 8</caption>
+<thead>
+<tr><th scope="col">played_hours_mean</th><th scope="col">played_hours_median</th><th scope="col">played_hours_min</th><th scope="col">played_hours_max</th><th scope="col">Age_mean</th><th scope="col">Age_median</th><th scope="col">Age_min</th><th scope="col">Age_max</th></tr>
+<tr><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+<tr><td>5.85</td><td>0.1</td><td>0</td><td>223.1</td><td>21.14</td><td>19</td><td>9</td><td>58</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<table class="dataframe">
+<caption>A tibble: 7 × 3</caption>
+<thead>
+<tr><th scope="col">gender</th><th scope="col">n</th><th scope="col">percentage</th></tr>
+<tr><th scope="col">&lt;chr&gt;</th><th scope="col">&lt;int&gt;</th><th scope="col">&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+<tr><td>Agender          </td><td>  2</td><td> 1.02</td></tr>
+<tr><td>Female           </td><td> 37</td><td>18.88</td></tr>
+<tr><td>Male             </td><td>124</td><td>63.27</td></tr>
+<tr><td>Non-binary       </td><td> 15</td><td> 7.65</td></tr>
+<tr><td>Other            </td><td>  1</td><td> 0.51</td></tr>
+<tr><td>Prefer not to say</td><td> 11</td><td> 5.61</td></tr>
+<tr><td>Two-Spirited     </td><td>  6</td><td> 3.06</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<table class="dataframe">
+<caption>A tibble: 5 × 3</caption>
+<thead>
+<tr><th scope="col">experience</th><th scope="col">n</th><th scope="col">percentage</th></tr>
+<tr><th scope="col">&lt;chr&gt;</th><th scope="col">&lt;int&gt;</th><th scope="col">&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+<tr><td>Amateur </td><td>63</td><td>32.14</td></tr>
+<tr><td>Beginner</td><td>35</td><td>17.86</td></tr>
+<tr><td>Pro     </td><td>14</td><td> 7.14</td></tr>
+<tr><td>Regular </td><td>36</td><td>18.37</td></tr>
+<tr><td>Veteran </td><td>48</td><td>24.49</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=69d25aa8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Potential-issues/limitations-with-players.csv">Potential issues/limitations with players.csv<a class="anchor-link" href="#Potential-issues/limitations-with-players.csv">¶</a></h4><ul>
+<li>Age distributions seems to be pretty wide ranging from 9 to 58; This wide range can be because of player's entering wrong personal detials which may cause potential errors in our further predictions</li>
+<li>Male gender seems to be prominent among the dataset; This can also cause a problem in accuracy when making predictions further</li>
+<li>Players with 0 played_hours; Some players have 0 played hours, so they don't really help with analyzing user behaviour however their data exists in the table making the entry redundant</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=29fc10f7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Exploration-of-sessions-dataset">Exploration of sessions dataset<a class="anchor-link" href="#Exploration-of-sessions-dataset">¶</a></h3>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7d98192f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -7706,13 +7844,79 @@ $ original_end_time   <span class="ansi-black-intense-fg">&lt;dbl&gt;</span> 1.7
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=16fe8d91">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Summary-statistics-for-the-values-in-sessions">Summary statistics for the values in sessions<a class="anchor-link" href="#Summary-statistics-for-the-values-in-sessions">¶</a></h4><p>Please run the cell below the get the summary statistics for the values in the sessions dataset.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=432596f8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-r"><pre><span></span><span class="n">sessions</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="nf">where</span><span class="p">(</span><span class="n">is.numeric</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">summarise</span><span class="p">(</span><span class="nf">across</span><span class="p">(</span><span class="nf">everything</span><span class="p">(),</span>
+<span class="w">                   </span><span class="nf">list</span><span class="p">(</span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="nf">round</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">.x</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<span class="w">                        </span><span class="n">median</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="nf">round</span><span class="p">(</span><span class="nf">median</span><span class="p">(</span><span class="n">.x</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<span class="w">                        </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="nf">round</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">.x</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
+<span class="w">                        </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="nf">round</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">.x</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">))))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<table class="dataframe">
+<caption>A tibble: 1 × 8</caption>
+<thead>
+<tr><th scope="col">original_start_time_mean</th><th scope="col">original_start_time_median</th><th scope="col">original_start_time_min</th><th scope="col">original_start_time_max</th><th scope="col">original_end_time_mean</th><th scope="col">original_end_time_median</th><th scope="col">original_end_time_min</th><th scope="col">original_end_time_max</th></tr>
+<tr><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+<tr><td>1.719201e+12</td><td>1.7192e+12</td><td>1.7124e+12</td><td>1.72733e+12</td><td>1.719196e+12</td><td>1.71918e+12</td><td>1.7124e+12</td><td>1.72734e+12</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=852848a8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Potential-issues/limitations-with-sessions.csv">Potential issues/limitations with sessions.csv<a class="anchor-link" href="#Potential-issues/limitations-with-sessions.csv">¶</a></h4><ul>
+<li>No session ID; Session entries does not have a unique id to identify each of them which may cause us to get confused when trying to identify each of the session if we ever need to</li>
+<li>Short duration sessions; We don't really know if these short sessions are solid gameplay's or a result of potential technical problem with player's gameplay. This can also cause inaccuracy in prediciton in the further predicition</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=256524d4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>In summary, we have 2 dataset files. The first file ("players.csv"), lists each of the player's personal details that played on the minecraft server. We have their personal details like their age, name, gender, etc.
+<h3 id="Summary-of-dataset-exploration">Summary of dataset exploration<a class="anchor-link" href="#Summary-of-dataset-exploration">¶</a></h3><p>In summary, we have 2 dataset files. The first file ("players.csv"), lists each of the player's personal details that played on the minecraft server. We have their personal details like their age, name, gender, etc.
 The second file ("sessions.csv"), has records of every gameplay session for every player that played on the minecraf server.</p>
 <p>By combining these 2 datasets, throughout hashedEmail column we can exmaine how player characteristics relate to engagement behaviours such as playtime or session amount. Discovering this type of relation can help us further predict more variables</p>
 </div>
@@ -7725,7 +7929,7 @@ The second file ("sessions.csv"), has records of every gameplay session for ever
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Questions">Questions<a class="anchor-link" href="#Questions">¶</a></h3><p>Now that we have explored our datasets, it's time to step into the questions.</p>
+<h2 id="Questions">Questions<a class="anchor-link" href="#Questions">¶</a></h2><p>Now that we have explored our datasets, it's time to step into the questions.</p>
 </div>
 </div>
 </div>
